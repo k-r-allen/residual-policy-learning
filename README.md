@@ -11,10 +11,13 @@ https://arxiv.org/abs/1812.06298
 https://k-r-allen.github.io/residual-policy-learning/
 
 ## Install
+Visit https://github.com/openai/baselines and install their prerequisites. (We have tested with `tensorflow==1.10.1`.)
+
+Then:
 ```
-pip install -r dependencies.txt
 pip install -r requirements.txt
 ```
 
 ## Usage Examples
 TODO
+
