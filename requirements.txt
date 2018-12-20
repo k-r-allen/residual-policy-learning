@@ -1,6 +1,8 @@
 -e git+https://github.com/openai/mujoco-py@a9f563cbb81d45f2379c6bcc4a4cd73fac09c4be#egg=mujoco_py
+numpy==1.14.5
 gym==0.10.9
 matplotlib==3.0.0
 pandas==0.23.4
 seaborn==0.9.0
 -e git+https://github.com/openai/baselines.git@c28acb22030f594f94d128bf47b489cc704f593e#egg=baselines
+mpi4py==3.0.0
