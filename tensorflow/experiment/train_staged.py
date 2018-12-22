@@ -136,7 +136,7 @@ def train(policy, rollout_worker, evaluator,
 
 
 def launch(
-    env, logdir, n_epochs, num_cpu, seed, replay_strategy, policy_save_interval, clip_return, skip_training,
+    env, logdir, n_epochs, num_cpu, seed, replay_strategy, policy_save_interval, clip_return, skip_training, config_path,
     override_params={}, save_policies=True, policy_path=None
 ):
     # Fork for multi-CPU MPI implementation.
@@ -168,11 +168,13 @@ def launch(
     set_global_seeds(rank_seed)
 
     # Prepare params.
-    params = config.DEFAULT_PARAMS
+    with open(config_path) as f:
+        params = json.load(f)
+    if 'TwoFrame' in env:
+        params['network_class'] = 'models.actor_critic_avg:ActorCritic'
+
     params['env_name'] = env
     params['replay_strategy'] = replay_strategy
-    if env in config.DEFAULT_ENV_PARAMS:
-        params.update(config.DEFAULT_ENV_PARAMS[env])  # merge env-specific parameters in
     params.update(**override_params)  # makes it possible to override any parameter
     with open(os.path.join(logger.get_dir(), 'params.json'), 'w') as f:
         json.dump(params, f)
@@ -251,7 +253,19 @@ def launch(
 @click.option('--clip_return', type=int, default=1, help='whether or not returns should be clipped')
 @click.option('--skip_training', is_flag=True, help='whether or not training should be skipped')
 @click.option('--policy_path', type=str, default=None, help='path to saved policy')
+@click.option('--config_path', type=str, default=None, help='path to json config file')
+@click.option('--random_eps', type=float, default=None, help='random_eps if using expert explore baseline')
+@click.option('--controller_prop', type=float, default=None, help='alpha if using expert explore baseline')
 def main(**kwargs):
+    override_params = {}
+    if kwargs['random_eps'] is not None:
+        override_params['random_eps'] = kwargs['random_eps']
+    if kwargs['controller_prop'] is not None:
+        override_params['controller_prop'] = kwargs['controller_prop']
+    
+    kwargs['override_params'] = override_params
+    kwargs.pop('random_eps',None)
+    kwargs.pop('controller_prop',None)
     launch(**kwargs)
 
 

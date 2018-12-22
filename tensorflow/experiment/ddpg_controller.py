@@ -166,7 +166,8 @@ class DDPG(object):
         #pdb.set_trace()
         explore = np.random.binomial(1, random_eps, u.shape[0]).reshape(-1, 1)
         controller = np.random.binomial(1, controller_prop, u.shape[0]).reshape(-1,1)
-        u += explore*controller * (self._controller_action(o.reshape(-1, self.dimo), g_orig.reshape(-1, self.dimg))-u)
+        if np.any(explore*controller):
+            u += explore*controller * (self._controller_action(o.reshape(-1, self.dimo), g_orig.reshape(-1, self.dimg))-u)
         u += explore*(1-controller) * (self._random_action(u.shape[0]) - u)  # eps-greedy
         if u.shape[0] == 1:
             u = u[0]
