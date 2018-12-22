@@ -8,8 +8,6 @@ import gym
 from gym_residual_fetch.envs.mpc_controller import MPCController
 from gym_residual_fetch.envs.miscalibrated_push_controller import get_push_control
 from gym_residual_fetch.envs.oscillating_pick_and_place_controller import get_pick_and_place_control
-from gym_residual_complex_objects.envs.complex_push_controller import get_complex_push_control
-from gym_residual_complex_objects.envs.complex_pickandplace_controller import get_complex_pick_and_place_control
 from gym_residual_complex_objects.envs.hook_controller import get_hook_control
 
 from baselines import logger
