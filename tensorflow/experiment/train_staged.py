@@ -9,7 +9,7 @@ from mpi4py import MPI
 from baselines import logger
 from baselines.common import set_global_seeds
 from baselines.common.mpi_moments import mpi_moments
-import configs.config_copy as config
+import configs.config_standard_pickandplace as config
 # from rollout_controller import RolloutWorker
 from baselines.her.rollout import RolloutWorker
 
@@ -53,7 +53,7 @@ def train(policy, rollout_worker, evaluator,
 
     logger.info("Training...")
     best_success_rate = -1
-    thresh = 1.0
+    thresh = kwargs['thresh']
     prev_losses = [0.0]
     losses = [0.0]
     actor_losses = [0.0]
@@ -230,6 +230,8 @@ def launch(
         kwargs['scratch'] = True
     else:
         kwargs['scratch'] = False
+
+    kwargs['thresh'] = params['threshold']
 
     train(
         logdir=logdir, policy=policy, rollout_worker=rollout_worker,
