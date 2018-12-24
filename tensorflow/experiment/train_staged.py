@@ -10,8 +10,8 @@ from baselines import logger
 from baselines.common import set_global_seeds
 from baselines.common.mpi_moments import mpi_moments
 import configs.config_standard_pickandplace as config
-# from rollout_controller import RolloutWorker
-from baselines.her.rollout import RolloutWorker
+from rollout_controller import RolloutWorker
+#from baselines.her.rollout import RolloutWorker
 
 from baselines.her.util import mpi_fork
 import pickle as pkl
@@ -217,7 +217,7 @@ def launch(
         'T': params['T'],
     }
 
-    for name in ['T', 'rollout_batch_size', 'gamma','noise_eps', 'random_eps']: #['T', 'rollout_batch_size', 'gamma', 'controller_prop','noise_eps', 'random_eps']:
+    for name in ['T', 'rollout_batch_size', 'gamma','noise_eps', 'random_eps','controller_prop']: #['T', 'rollout_batch_size', 'gamma', 'controller_prop','noise_eps', 'random_eps']:
         rollout_params[name] = params[name]
         eval_params[name] = params[name]
 
