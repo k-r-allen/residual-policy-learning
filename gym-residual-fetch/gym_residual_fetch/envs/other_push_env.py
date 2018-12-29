@@ -1,3 +1,4 @@
+from .push_database_controller import create_push_database_controller
 from .noisy_push_database_controller import create_noisy_push_database_controller
 
 import gym
@@ -210,7 +211,7 @@ class TwoFramePusherNoisyEnv(NoisyPusherEnv):
 class ResidualTwoFramePusherNoisyEnv(TwoFramePusherNoisyEnv):
 
     def __init__(self):
-        self.controller = create_noisy_push_database_controller(scale_by_distance=False)
+        self.controller = create_noisy_push_database_controller()
         self._last_observation = None
         TwoFramePusherNoisyEnv.__init__(self)
 
@@ -223,14 +224,5 @@ class ResidualTwoFramePusherNoisyEnv(TwoFramePusherNoisyEnv):
         action = np.clip(action, -1, 1)
         
         return TwoFramePusherNoisyEnv.step(self, action)
-
-
-class ResidualDistanceScalingTwoFramePusherNoisyEnv(ResidualTwoFramePusherNoisyEnv):
-
-    def __init__(self):
-        self.controller = create_noisy_push_database_controller(scale_by_distance=True)
-        self._last_observation = None
-        ResidualTwoFramePusherNoisyEnv.__init__(self)
-
 
 

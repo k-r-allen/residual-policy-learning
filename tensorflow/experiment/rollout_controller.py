@@ -38,6 +38,7 @@ class RolloutWorker:
 
         self.success_history = deque(maxlen=history_len)
         self.Q_history = deque(maxlen=history_len)
+        self.returns_history = deque(maxlen=history_len) # added by TS
 
         self.n_episodes = 0
         self.g = np.empty((self.rollout_batch_size, self.dims['g']), np.float32)  # goals
@@ -73,7 +74,7 @@ class RolloutWorker:
         ag[:] = self.initial_ag
 
         # generate episodes
-        obs, achieved_goals, acts, goals, successes = [], [], [], [], []
+        obs, achieved_goals, acts, goals, successes, rewards = [], [], [], [], [], []
         info_values = [np.empty((self.T, self.rollout_batch_size, self.dims['info_' + key]), np.float32) for key in self.info_keys]
         Qs = []
         for t in range(self.T):
@@ -98,14 +99,16 @@ class RolloutWorker:
             o_new = np.empty((self.rollout_batch_size, self.dims['o']))
             ag_new = np.empty((self.rollout_batch_size, self.dims['g']))
             success = np.zeros(self.rollout_batch_size)
+            reward = np.zeros(self.rollout_batch_size) # added by TS
             # compute new states and observations
             for i in range(self.rollout_batch_size):
                 try:
                     # We fully ignore the reward here because it will have to be re-computed
                     # for HER.
-                    curr_o_new, _, _, info = self.envs[i].step(u[i])
+                    curr_o_new, r, _, info = self.envs[i].step(u[i])
                     if 'is_success' in info:
                         success[i] = info['is_success']
+                    reward[i] = r # Added by TS
                     o_new[i] = curr_o_new['observation']
                     ag_new[i] = curr_o_new['achieved_goal']
                     for idx, key in enumerate(self.info_keys):
@@ -123,6 +126,7 @@ class RolloutWorker:
             obs.append(o.copy())
             achieved_goals.append(ag.copy())
             successes.append(success.copy())
+            rewards.append(reward.copy()) # added by TS
             acts.append(u.copy())
             goals.append(self.g.copy())
             o[...] = o_new
@@ -143,6 +147,7 @@ class RolloutWorker:
         assert successful.shape == (self.rollout_batch_size,)
         success_rate = np.mean(successful)
         self.success_history.append(success_rate)
+        self.returns_history.append(np.mean(np.sum(rewards, axis=0))) # added by TS
         if self.compute_Q:
             self.Q_history.append(np.mean(Qs))
         self.n_episodes += self.rollout_batch_size
@@ -154,6 +159,7 @@ class RolloutWorker:
         """
         self.success_history.clear()
         self.Q_history.clear()
+        self.returns_history.clear() # added by TS
 
     def current_success_rate(self):
         return np.mean(self.success_history)
@@ -172,6 +178,7 @@ class RolloutWorker:
         """
         logs = []
         logs += [('success_rate', np.mean(self.success_history))]
+        logs += [('returns', np.mean(self.returns_history))] # added by TS
         if self.compute_Q:
             logs += [('mean_Q', np.mean(self.Q_history))]
         logs += [('episode', self.n_episodes)]
