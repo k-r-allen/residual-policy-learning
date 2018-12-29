@@ -74,3 +74,27 @@ register(
     entry_point='gym_residual_fetch.envs:MPCPushEnv',
     timestep_limit=50,
 )
+
+register(
+    id='OtherPusherEnv-v0',
+    entry_point='gym_residual_fetch.envs:PusherEnv',
+    timestep_limit=150,
+)
+
+register(
+    id='ResidualOtherPusherEnv-v0',
+    entry_point='gym_residual_fetch.envs:ResidualPusherEnv',
+    timestep_limit=150,
+)
+
+register(
+    id='TwoFrameNoisyOtherPusherEnv-v0',
+    entry_point='gym_residual_fetch.envs:TwoFramePusherNoisyEnv',
+    timestep_limit=150,
+)
+
+register(
+    id='ResidualTwoFramePusherNoisyEnv-v0',
+    entry_point='gym_residual_fetch.envs:ResidualTwoFramePusherNoisyEnv',
+    timestep_limit=150,
+)

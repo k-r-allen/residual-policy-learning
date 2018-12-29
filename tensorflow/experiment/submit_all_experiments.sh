@@ -3,7 +3,7 @@ envs=("FetchPush-v1" "FetchPickAndPlace-v1" "FetchPushHighFriction-v0" "TwoFrame
 residuals=("ResidualMPCPush-v0" "ResidualFetchPickAndPlace-v0" "ResidualFetchPush-v0" "TwoFrameResidualHookNoisy-v0" "ResidualComplexHookTrain-v0")
 
 expertexplore=("MPCPush-v0" "FetchPickAndPlace-v1" "FetchPushHighFriction-v0" "TwoFrameHookNoisy-v0" "ComplexHookTrain-v0")
-eps=(0.5 0.5 0.5 0.6 0.6)
+eps=(1.0 1.0 1.0 1.0 1.0)
 alpha=(0.8 0.8 0.8 0.8 0.8)
 configs=("push.json" "pickandplace.json" "push.json" "hook.json" "hook.json")
 cpus=(19 19 19 1 1)

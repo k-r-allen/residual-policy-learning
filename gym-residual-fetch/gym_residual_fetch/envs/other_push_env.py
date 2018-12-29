@@ -136,6 +136,24 @@ class PusherEnv(mujoco_env.MujocoEnv, utils.EzPickle):
         return observation
 
 
+class ResidualPusherEnv(PusherEnv):
+
+    def __init__(self):
+        self.controller = create_push_database_controller()
+        self._last_observation = None
+        PusherEnv.__init__(self)
+
+    def step(self, residual_action):
+        residual_action = 2. * residual_action
+
+        obs = self._get_obs()
+
+        action = np.add(residual_action, self.controller(obs))
+        action = np.clip(action, -1, 1)
+        
+        return PusherEnv.step(self, action)
+
+
 class NoisyPusherEnv(PusherEnv):
 
     def _get_obs(self, noise=0.005):

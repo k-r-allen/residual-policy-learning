@@ -3,3 +3,4 @@ from gym_residual_fetch.envs.residual_fetch_push_env import MyFetchPushEnv, Resi
 from gym_residual_fetch.envs.residual_fetch_push_env import FetchPushHighFrictionEnv
 from gym_residual_fetch.envs.fetch_hook_env import FetchHookEnv, ResidualFetchHookEnv, TwoFrameResidualHookNoisyEnv, TwoFrameHookNoisyEnv, NoisyResidualFetchHookEnv, NoisyFetchHookEnv
 from gym_residual_fetch.envs.residual_mpc_push_env import ResidualMPCPushEnv, MPCPushEnv
+from gym_residual_fetch.envs.other_push_env import PusherEnv, ResidualPusherEnv, TwoFramePusherNoisyEnv, ResidualTwoFramePusherNoisyEnv
