@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mujoco>
+    <compiler angle="radian" coordinate="local" meshdir="../stls/fetch" texturedir="../textures"></compiler>
+    <option timestep="0.002">
+        <flag warmstart="enable"></flag>
+    </option>
+
+    <include file="shared.xml"></include>
+    
+    <worldbody>
+        <geom name="floor0" pos="1.42 0.75 0" size="1.0 0.7 1" type="plane" condim="3" material="floor_mat"></geom>
+        <body name="floor0" pos="1.42 0.75 0">
+            <site name="target0" pos="0 0 0.5" size="0.02 0.02 0.02" rgba="1 0 0 1" type="sphere"></site>
+        </body>
+
+        <include file="robot.xml"></include>
+        
+        <body pos="1.65 0.75 0.2" name="table0">
+            <geom size="0.5 0.45 0.2" type="box" mass="20000" material="table_mat"></geom><geom size="0.019601656568176168 0.03401967731696811 0.00894858651310948" pos="0.2881706957633852 0.0036246544152883087 0.2089485865131095" type="box" mass="200" rgba="0.4 0.4 0.4 1"></geom>
+<geom size="0.030824538483327203 0.02256593030913493 0.0005637007685084586" pos="-0.03946363284823051 -0.2536896070932628 0.20056370076850846" type="box" mass="200" rgba="0.4 0.4 0.4 1"></geom>
+<geom size="0.009745416823882937 0.04251058315456958 0.002832531672474441" pos="-0.21738159800264645 -0.16292977949312396 0.20283253167247445" type="box" mass="200" rgba="0.4 0.4 0.4 1"></geom>
+<geom size="0.026381151755671867 0.04758707998816133 0.002751859168580895" pos="-0.21399938534762303 0.264474255975874 0.2027518591685809" type="box" mass="200" rgba="0.4 0.4 0.4 1"></geom>
+<geom size="0.04982418778782477 0.025327987276900464 0.0005932686214790076" pos="0.297286001471256 0.2204381816385717 0.20059326862147903" type="box" mass="200" rgba="0.4 0.4 0.4 1"></geom>
+<geom size="0.00663511167367056 0.018646223529449592 0.0069959982993991355" pos="0.22279853411400102 0.11844654643165536 0.20699599829939916" type="box" mass="200" rgba="0.4 0.4 0.4 1"></geom>
+<geom size="0.03885212355873421 0.012568565969141358 0.004530104476569479" pos="0.20167960921275802 0.282021044072643 0.2045301044765695" type="box" mass="200" rgba="0.4 0.4 0.4 1"></geom>
+<geom size="0.018617139570895974 0.011845431542228377 0.004250374349694736" pos="0.17394587572170095 0.2540389231222549 0.20425037434969476" type="box" mass="200" rgba="0.4 0.4 0.4 1"></geom>
+<geom size="0.023329321971282964 0.03322912814492106 0.001180305301757471" pos="-0.01712884429624295 -0.24781146960721145 0.20118030530175748" type="box" mass="200" rgba="0.4 0.4 0.4 1"></geom>
+<geom size="0.02117032915026763 0.01322767551494473 0.004852533309771553" pos="-0.06940762512869647 -0.1932380541444989 0.20485253330977157" type="box" mass="200" rgba="0.4 0.4 0.4 1"></geom>
+<geom size="0.021216002102380723 0.035634135564881125 0.006137910474641294" pos="-0.11220232104757183 -0.1411872508450271 0.2061379104746413" type="box" mass="200" rgba="0.4 0.4 0.4 1"></geom>
+<geom size="0.01637794798459641 0.026202477479353076 0.0014545991920348756" pos="0.1618836217139129 -0.09001958818526948 0.2014545991920349" type="box" mass="200" rgba="0.4 0.4 0.4 1"></geom>
+<geom size="0.03667570752698477 0.01207525419367288 0.00036815305464902014" pos="0.23531365040115798 0.21984614613132708 0.20036815305464903" type="box" mass="200" rgba="0.4 0.4 0.4 1"></geom>
+<geom size="0.011391301671764605 0.0034319734924099492 0.004606073536758433" pos="-0.2215865890574258 -0.10701346226483416 0.20460607353675844" type="box" mass="200" rgba="0.4 0.4 0.4 1"></geom>
+<geom size="0.028047835702858227 0.045252224804264385 0.0017065916214358031" pos="0.05077978858963916 0.2611648406287585 0.2017065916214358" type="box" mass="200" rgba="0.4 0.4 0.4 1"></geom>
+<geom size="0.008901142976800704 0.03063664316337925 0.0028392698343198525" pos="-0.028559866933888345 0.008156805736723227 0.20283926983431985" type="box" mass="200" rgba="0.4 0.4 0.4 1"></geom>
+<geom size="0.02534647192325689 0.02681453524396407 0.0062675457981182445" pos="0.0635005436341548 0.11034018890411046 0.20626754579811826" type="box" mass="200" rgba="0.4 0.4 0.4 1"></geom>
+<geom size="0.035093788544117856 0.049884158015240945 0.0017223147665332349" pos="0.14690435370800536 -0.02213162992211898 0.20172231476653324" type="box" mass="200" rgba="0.4 0.4 0.4 1"></geom>
+<geom size="0.042531289953748184 0.02598613103825716 0.006308386133845194" pos="0.1832341334330833 -0.08053328973604942 0.2063083861338452" type="box" mass="200" rgba="0.4 0.4 0.4 1"></geom>
+        </body>
+        
+        <body name="object0" pos="0.025 0.025 0.025">
+            <joint name="object0:joint" type="free" damping="0.01"></joint>
+            <geom size="0.0192692949844928 0.0192692949844928 0.0192692949844928" type="sphere" condim="3" name="object0" material="block_mat" mass="6.632946624796857" rgba="0.4 0.4 0.8 1"></geom>
+            <site name="object0" pos="0 0 0" size="0.002 0.002 0.002" rgba="1 0 0 1" type="sphere"></site>
+        </body>
+
+        <body name="stick" pos="1.0 0.025 0.025">
+            <joint name="stick:joint" type="free" damping="0.01"></joint>
+            <geom size="0.4 0.015 0.015" type="box" condim="3" name="stick" material="block_mat" mass="2"></geom>
+            <site name="stick" pos="-0.25 0 0" size="0.002 0.002 0.002" rgba="1 0 0 1" type="sphere"></site>
+        </body>
+
+        <light directional="true" ambient="0.2 0.2 0.2" diffuse="0.8 0.8 0.8" specular="0.3 0.3 0.3" castshadow="false" pos="0 0 4" dir="0 0 -1" name="light0"></light>
+    </worldbody>
+    
+    <actuator>
+        <position ctrllimited="true" ctrlrange="0 0.2" joint="robot0:l_gripper_finger_joint" kp="30000" name="robot0:l_gripper_finger_joint" user="1"></position>
+        <position ctrllimited="true" ctrlrange="0 0.2" joint="robot0:r_gripper_finger_joint" kp="30000" name="robot0:r_gripper_finger_joint" user="1"></position>
+    </actuator>
+</mujoco>
+    

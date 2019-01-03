@@ -18,6 +18,11 @@ Then:
 pip install -r requirements.txt
 ```
 
+Then in `rpl_environments`:
+```
+pip install -e .
+```
+
 ## Usage Example
 
 See `tensorflow/experiments/run_all_experiments.sh`.
