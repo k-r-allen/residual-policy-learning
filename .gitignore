@@ -1,0 +1,7 @@
+.DS_Store
+*.png
+*.sh
+*.zip
+__pycache__
+gym-residual-fetch/gym_residual_fetch.egg-info
+venv/
