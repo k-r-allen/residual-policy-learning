@@ -26,19 +26,3 @@ def create_push_database_controller(scale_by_distance=False, scale_factor=1.):
     kdtree = KDTree(states)
 
     return DatabaseController(kdtree, actions)
-
-
-# def create_push_database_controller(scale_by_distance=False, scale_factor=1.):
-
-#     states, actions = np.load(database_file)
-#     states = np.array([list(s) for s in states])
-#     kdtree = KDTree(states)
-
-#     def controller(obs):
-#         distance, idx = kdtree.query(obs['observation'])
-#         if scale_by_distance:
-#             return actions[idx] * 1./(1. + scale_factor * distance)
-            
-#         return actions[idx]
-
-#     return controller

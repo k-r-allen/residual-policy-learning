@@ -13,7 +13,6 @@ class MPCController(object):
         self.num_expansions = num_expansions
 
     def act(self, obs, debug_info):
-        # print('acting')
         queue = []
 
         initial_cost = self.heuristic(obs, [])
@@ -42,9 +41,7 @@ class MPCController(object):
                 self.model.env.sim.set_state(mj_sim_state)
                 self.model.env.sim.forward()
 
-                # self.model.render()
                 child_obs, _, _, child_debug_info = self.model.step(self.action_scale * np.array(action))
-                # self.model.render()
                 mj_sim_state = self.model.env.sim.get_state()
                 qpos = mj_sim_state.qpos.copy()
                 qvel = mj_sim_state.qvel.copy()
@@ -66,12 +63,10 @@ class MPCController(object):
 
                 visited.add(tuple(np.sum(child_actions_from_root, axis=0)))
 
-        # import pdb; pdb.set_trace()
-        # print("best node cost:", best_node_cost)
         best_actions = best_node[-1][-1]
         if len(best_actions) == 0:
             return np.zeros(4)
-        # print("best actions:", best_actions)
+
         return best_actions[0]
 
     def seed(self, seed):
@@ -106,4 +101,3 @@ class MPCController(object):
         gripper_to_target_distance = len(actions_from_root) + int(10000 * np.linalg.norm(np.subtract(gripper_position, target_gripper_position)))
 
         return (object_to_goal_distance, gripper_to_target_distance, np.random.random())
-        # return (np.linalg.norm(np.subtract(gripper_position, goal)), 0, np.random.random())

@@ -129,7 +129,6 @@ def get_hook_control(obs, atol=1e-2):
 
     if DEBUG:
         print("Sweeping back")
-    # return np.array([-0.4, 0., 0., -1.])
 
     direction = np.subtract(place_position, block_position)
     direction = direction[:2] / np.linalg.norm(direction[:2])
