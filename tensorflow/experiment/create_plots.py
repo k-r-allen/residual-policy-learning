@@ -171,25 +171,6 @@ def create_mbrl_pusher_plot():
         methods=methods, labels=labels, colors=colors, steps_per_epoch=steps_per_epoch, cutoff=cutoff, 
         residual_start_offset=residual_start_offset, log_plot=False, add_to_plot=add_to_plot)
 
-
-def create_mbrl_noisy_pusher_plot():
-    dir_name = 'logs'
-    xname = 'simulator_steps'
-    yname = 'test/returns'
-    xlabel = 'Simulator Steps'
-    ylabel = 'Test Returns'
-    title = "MBRL Noisy Pusher"
-    outfile = 'mbrl_noisy_pusher_results.png'
-    methods = ["TwoFrameNoisyOtherPusherEnv-v0_expertexplore", "ResidualTwoFramePusherNoisyEnv-v0", "TwoFrameNoisyOtherPusherEnv-v0"]
-    labels = ['Expert Explore', 'RPL (Ours)', 'DDPG+HER']
-    colors = ['red', 'green', 'orange']
-    steps_per_epoch = 50 * 1 * 150 * 4
-    cutoff = 275
-    residual_start_offset = 15500
-    return create_plot(dir_name=dir_name, xname=xname, yname=yname, xlabel=xlabel, ylabel=ylabel, title=title, outfile=outfile,
-        methods=methods, labels=labels, colors=colors, steps_per_epoch=steps_per_epoch, cutoff=cutoff, 
-        residual_start_offset=residual_start_offset, log_plot=False)
-
 if __name__ == "__main__":
     create_mpc_push_plot()
     create_pickandplace_plot()
@@ -197,6 +178,4 @@ if __name__ == "__main__":
     create_noisy_hook_plot()
     create_complex_hook_plot()
     create_mbrl_pusher_plot()
-    create_mbrl_noisy_pusher_plot()
-
 
