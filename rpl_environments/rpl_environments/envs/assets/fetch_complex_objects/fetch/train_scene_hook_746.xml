@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mujoco>
+    <compiler angle="radian" coordinate="local" meshdir="../stls/fetch" texturedir="../textures"></compiler>
+    <option timestep="0.002">
+        <flag warmstart="enable"></flag>
+    </option>
+
+    <include file="shared.xml"></include>
+    
+    <worldbody>
+        <geom name="floor0" pos="1.42 0.75 0" size="1.0 0.7 1" type="plane" condim="3" material="floor_mat"></geom>
+        <body name="floor0" pos="1.42 0.75 0">
+            <site name="target0" pos="0 0 0.5" size="0.02 0.02 0.02" rgba="1 0 0 1" type="sphere"></site>
+        </body>
+
+        <include file="robot.xml"></include>
+        
+        <body pos="1.65 0.75 0.2" name="table0">
+            <geom size="0.5 0.45 0.2" type="box" mass="20000" material="table_mat"></geom><geom size="0.03024464616802813 0.01980567649219623 0.0011656412396577936" pos="0.014865865982850501 -0.2575941552061767 0.2011656412396578" type="box" mass="200" rgba="0.4 0.4 0.4 1"></geom>
+<geom size="0.01783621718492241 0.019153144311536106 0.0031323638554582103" pos="0.15766876863966917 -0.2525976708306919 0.20313236385545821" type="box" mass="200" rgba="0.4 0.4 0.4 1"></geom>
+<geom size="0.028477965628502782 0.01315775884420771 0.00470893323464327" pos="-0.29662473561522984 0.14228782155067488 0.2047089332346433" type="box" mass="200" rgba="0.4 0.4 0.4 1"></geom>
+<geom size="0.028014227458098475 0.04576283056492651 0.0010940758431427595" pos="0.026173248611538358 -0.09302045815585319 0.20109407584314276" type="box" mass="200" rgba="0.4 0.4 0.4 1"></geom>
+<geom size="0.003620495180123359 0.029224978379201256 0.0006216227148186934" pos="0.1760855223989492 0.05757427142111965 0.2006216227148187" type="box" mass="200" rgba="0.4 0.4 0.4 1"></geom>
+<geom size="0.022369013242053926 0.045669170853694964 0.001198288741792528" pos="-0.20274834176362422 -0.03828061634338992 0.20119828874179255" type="box" mass="200" rgba="0.4 0.4 0.4 1"></geom>
+<geom size="0.009072686215309354 0.02808543876054614 0.0034957629197421656" pos="0.21420258847563683 -0.13543734370369223 0.20349576291974217" type="box" mass="200" rgba="0.4 0.4 0.4 1"></geom>
+        </body>
+        
+        <body pos="1.375 0.6236522125505 0.46434778744949995" name="object0">
+            <light castshadow="false"/>
+            <geom type="mesh" density="1051.20734791" rgba="1 1 1 1" material="object" mesh="object_mesh" conaffinity="0" contype="1"/>
+            <joint name="object0:joint" type="free" damping="4.94602111810744"></joint>
+            <site name="object0" pos="0.0 0.06134778744950009 -0.044347787449499965" size="0.002 0.002 0.002" rgba="1 0 0 0" type="sphere"></site>
+        </body>
+
+        <body name="hook" pos="1.0 0.025 0.025">
+            <joint name="hook:joint" type="free" damping="0.01"></joint>
+            <geom size="0.4 0.015 0.015" type="box" condim="3" name="hook_base" material="block_mat" mass="2"></geom>
+            <geom size="0.015 0.1 0.015" pos="0.4 0.085 0." type="box" condim="3" name="hook_head" material="block_mat" mass="2"></geom>
+            <site name="hook" pos="-0.25 0 0" size="0.002 0.002 0.002" rgba="1 0 0 1" type="sphere"></site>
+        </body>
+
+        <light directional="true" ambient="0.2 0.2 0.2" diffuse="0.8 0.8 0.8" specular="0.3 0.3 0.3" castshadow="false" pos="0 0 4" dir="0 0 -1" name="light0"></light>
+    </worldbody>
+
+    <asset>
+        <mesh scale="0.00128369468624 0.00128369468624 0.00128369468624" file="mujoco_models/tesaract.stl" name="object_mesh"/>
+        <texture file="textures/obj_textures/wrinkled_0039.png" name="object"/>
+        <material specular="1" texture="object" rgba="0.9 0.9 0.9 1" shininess="0.3" name="object"/>
+    </asset>
+    
+    <actuator>
+        <position ctrllimited="true" ctrlrange="0 0.2" joint="robot0:l_gripper_finger_joint" kp="30000" name="robot0:l_gripper_finger_joint" user="1"></position>
+        <position ctrllimited="true" ctrlrange="0 0.2" joint="robot0:r_gripper_finger_joint" kp="30000" name="robot0:r_gripper_finger_joint" user="1"></position>
+    </actuator>
+</mujoco>
+    

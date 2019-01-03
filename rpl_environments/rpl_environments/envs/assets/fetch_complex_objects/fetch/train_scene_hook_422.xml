@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mujoco>
+    <compiler angle="radian" coordinate="local" meshdir="../stls/fetch" texturedir="../textures"></compiler>
+    <option timestep="0.002">
+        <flag warmstart="enable"></flag>
+    </option>
+
+    <include file="shared.xml"></include>
+    
+    <worldbody>
+        <geom name="floor0" pos="1.42 0.75 0" size="1.0 0.7 1" type="plane" condim="3" material="floor_mat"></geom>
+        <body name="floor0" pos="1.42 0.75 0">
+            <site name="target0" pos="0 0 0.5" size="0.02 0.02 0.02" rgba="1 0 0 1" type="sphere"></site>
+        </body>
+
+        <include file="robot.xml"></include>
+        
+        <body pos="1.65 0.75 0.2" name="table0">
+            <geom size="0.5 0.45 0.2" type="box" mass="20000" material="table_mat"></geom><geom size="0.03764523979060574 0.011080844322453546 0.002664148642018651" pos="-0.18714703200664914 -0.052364699576517765 0.20266414864201865" type="box" mass="200" rgba="0.4 0.4 0.4 1"></geom>
+<geom size="0.011354631962194932 0.04780377900211724 0.004340954286878826" pos="-0.19932959916259183 -0.1318261960231191 0.20434095428687885" type="box" mass="200" rgba="0.4 0.4 0.4 1"></geom>
+<geom size="0.03864637246412455 0.03941523518633845 0.003210433950323652" pos="0.11512477641297747 -0.058339106459823986 0.20321043395032368" type="box" mass="200" rgba="0.4 0.4 0.4 1"></geom>
+<geom size="0.03936933969273466 0.0486879946939771 0.0029658056078490226" pos="-0.1184288312753832 0.12826169774740592 0.20296580560784902" type="box" mass="200" rgba="0.4 0.4 0.4 1"></geom>
+<geom size="0.015821750571312652 0.045586298885435805 0.00037784929517243855" pos="-0.16098953809441166 -0.22432465366715704 0.20037784929517244" type="box" mass="200" rgba="0.4 0.4 0.4 1"></geom>
+<geom size="0.022280525620749628 0.02369206465756779 0.0029934071041473275" pos="-0.24240172636753798 0.10441368490857089 0.20299340710414734" type="box" mass="200" rgba="0.4 0.4 0.4 1"></geom>
+<geom size="0.028859882265919106 0.005503962614553733 0.00023758403954887057" pos="-0.021092123308450672 -0.1744847159154858 0.2002375840395489" type="box" mass="200" rgba="0.4 0.4 0.4 1"></geom>
+<geom size="0.023628213227675877 0.015017145936395557 0.0009035239177304551" pos="-0.04262767699147868 -0.07481314029336503 0.20090352391773048" type="box" mass="200" rgba="0.4 0.4 0.4 1"></geom>
+<geom size="0.008471912427398214 0.017597991922171527 0.0018146069103998166" pos="-0.09456737349218866 0.17768142738284592 0.20181460691039982" type="box" mass="200" rgba="0.4 0.4 0.4 1"></geom>
+<geom size="0.030840606881957885 0.010481660752213948 0.0029761391684797" pos="0.05471733914767307 -0.29210861016157386 0.2029761391684797" type="box" mass="200" rgba="0.4 0.4 0.4 1"></geom>
+<geom size="0.023593576659584767 0.03388875910462003 0.004120965731415679" pos="-0.06639447582301489 0.20342923554456077 0.2041209657314157" type="box" mass="200" rgba="0.4 0.4 0.4 1"></geom>
+<geom size="0.04635441030610422 0.008368711834969938 0.0008901366552095798" pos="0.15755971763480453 -0.18065707558666494 0.20089013665520958" type="box" mass="200" rgba="0.4 0.4 0.4 1"></geom>
+<geom size="0.034832642345860886 0.03528399431511712 0.0013188561154144434" pos="-0.2679040037544901 0.14756838683154894 0.20131885611541445" type="box" mass="200" rgba="0.4 0.4 0.4 1"></geom>
+        </body>
+        
+        <body pos="1.351398726674 0.6287683691464999 0.3945061050405" name="object0">
+            <light castshadow="false"/>
+            <geom type="mesh" density="6349.36846927" rgba="1 1 1 1" material="object" mesh="object_mesh" conaffinity="0" contype="1"/>
+            <joint name="object0:joint" type="free" damping="4.213293340992659"></joint>
+            <site name="object0" pos="0.02360127332600004 0.056231630853500136 0.025493894959499996" size="0.002 0.002 0.002" rgba="1 0 0 0" type="sphere"></site>
+        </body>
+
+        <body name="hook" pos="1.0 0.025 0.025">
+            <joint name="hook:joint" type="free" damping="0.01"></joint>
+            <geom size="0.4 0.015 0.015" type="box" condim="3" name="hook_base" material="block_mat" mass="2"></geom>
+            <geom size="0.015 0.1 0.015" pos="0.4 0.085 0." type="box" condim="3" name="hook_head" material="block_mat" mass="2"></geom>
+            <site name="hook" pos="-0.25 0 0" size="0.002 0.002 0.002" rgba="1 0 0 1" type="sphere"></site>
+        </body>
+
+        <light directional="true" ambient="0.2 0.2 0.2" diffuse="0.8 0.8 0.8" specular="0.3 0.3 0.3" castshadow="false" pos="0 0 4" dir="0 0 -1" name="light0"></light>
+    </worldbody>
+
+    <asset>
+        <mesh scale="0.0003637981742235 0.0003637981742235 0.0003637981742235" file="mujoco_models/toy_boat_xyz_with_guns.stl" name="object_mesh"/>
+        <texture file="textures/obj_textures/woven_0083.png" name="object"/>
+        <material specular="1" texture="object" rgba="0.9 0.9 0.9 1" shininess="0.3" name="object"/>
+    </asset>
+    
+    <actuator>
+        <position ctrllimited="true" ctrlrange="0 0.2" joint="robot0:l_gripper_finger_joint" kp="30000" name="robot0:l_gripper_finger_joint" user="1"></position>
+        <position ctrllimited="true" ctrlrange="0 0.2" joint="robot0:r_gripper_finger_joint" kp="30000" name="robot0:r_gripper_finger_joint" user="1"></position>
+    </actuator>
+</mujoco>
+    
