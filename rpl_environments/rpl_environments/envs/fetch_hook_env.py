@@ -47,7 +47,7 @@ class FetchHookEnv(fetch_env.FetchEnv, utils.EzPickle):
         elif mode == 'human':
             self._get_viewer().render()
 
-        return self.render(*args, **kwargs)
+        return super(FetchHookEnv, self).render(*args, **kwargs)
 
     def _sample_goal(self):
         goal_pos = self._goal_pos.copy()

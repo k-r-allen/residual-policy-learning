@@ -1,7 +1,7 @@
 #!/bin/bash
-envs=("FetchPush-v1" "FetchPickAndPlace-v1" "FetchPushHighFriction-v0" "TwoFrameHookNoisy-v0" "ComplexHookTrain-v0" "OtherPusherEnv-v0" "TwoFrameNoisyOtherPusherEnv-v0")
-residuals=("ResidualMPCPush-v0" "ResidualFetchPickAndPlace-v0" "ResidualFetchPush-v0" "TwoFrameResidualHookNoisy-v0" "ResidualComplexHookTrain-v0" "ResidualOtherPusherEnv-v0" "ResidualTwoFramePusherNoisyEnv-v0")
-expertexplore=("MPCPush-v0" "FetchPickAndPlace-v1" "FetchPushHighFriction-v0" "TwoFrameHookNoisy-v0" "ComplexHookTrain-v0" "OtherPusherEnv-v0" "TwoFrameNoisyOtherPusherEnv-v0")
+envs=("FetchPush-v1" "FetchPickAndPlace-v1" "SlipperyPush-v0" "TwoFrameHookNoisy-v0" "ComplexHook-v0" "OtherPusherEnv-v0" "TwoFrameNoisyOtherPusherEnv-v0")
+residuals=("ResidualMPCPush-v0" "ResidualFetchPickAndPlace-v0" "ResidualSlipperyPush-v0" "TwoFrameResidualHookNoisy-v0" "ResidualComplexHook-v0" "ResidualOtherPusherEnv-v0" "ResidualTwoFramePusherNoisyEnv-v0")
+expertexplore=("MPCPush-v0" "FetchPickAndPlace-v1" "SlipperyPush-v0" "TwoFrameHookNoisy-v0" "ComplexHook-v0" "OtherPusherEnv-v0" "TwoFrameNoisyOtherPusherEnv-v0")
 
 eps=(0.3 0.3 0.3 0.6 0.6 0.3 0.3)
 alpha=(0.8 0.8 0.8 0.8 0.8 0.8 0.8)

@@ -1,5 +1,4 @@
 from .push_database_controller import create_push_database_controller
-from .noisy_push_database_controller import create_noisy_push_database_controller
 
 import gym
 from gym import error, spaces, utils
@@ -153,76 +152,5 @@ class ResidualPusherEnv(PusherEnv):
         action = np.clip(action, -1, 1)
         
         return PusherEnv.step(self, action)
-
-
-class NoisyPusherEnv(PusherEnv):
-
-    def _get_obs(self, noise=0.005):
-        object_observation = self.get_body_com("object")
-        object_observation += np.random.normal(0, noise, size=object_observation.shape)
-
-        obs = np.concatenate([
-            self.sim.data.qpos.flat[:7],
-            self.sim.data.qvel.flat[:7],
-            self.get_body_com("tips_arm"),
-            object_observation,
-        ])
-
-        observation = {
-            'observation': obs,
-            'achieved_goal': object_observation.copy(),
-            'desired_goal': self.goal.copy(),
-        }
-
-        return observation
-
-
-
-class TwoFramePusherNoisyEnv(NoisyPusherEnv):
-
-    def __init__(self):
-        self._last_observation = None
-        
-        super(TwoFramePusherNoisyEnv, self).__init__()
-
-        self.observation_space.spaces['observation'] = spaces.Box(low=np.hstack((self.observation_space.spaces['observation'].low, self.observation_space.spaces['observation'].low)), 
-            high=np.hstack((self.observation_space.spaces['observation'].high, self.observation_space.spaces['observation'].high)),dtype=np.float32)
-
-    def step(self, action):
-
-        observation, reward, done, debug_info = NoisyPusherEnv.step(self, action)
-        
-        obs_out = observation.copy()
-        if self._last_observation is None:
-            self._last_observation = observation.copy()
-
-        obs_out['observation'] = np.hstack((self._last_observation['observation'], observation['observation'])) 
-        self._last_observation = observation.copy()
-        return obs_out, reward, done, debug_info
-
-    def reset(self):
-        observation = NoisyPusherEnv.reset(self)
-        self._last_observation = observation.copy()
-        observation['observation'] = np.hstack((self._last_observation['observation'], observation['observation']))
-
-        return observation
-
-
-class ResidualTwoFramePusherNoisyEnv(TwoFramePusherNoisyEnv):
-
-    def __init__(self):
-        self.controller = create_noisy_push_database_controller()
-        self._last_observation = None
-        TwoFramePusherNoisyEnv.__init__(self)
-
-    def step(self, residual_action):
-        residual_action = 2. * residual_action
-
-        obs = self._get_obs()
-
-        action = np.add(residual_action, self.controller(obs))
-        action = np.clip(action, -1, 1)
-        
-        return TwoFramePusherNoisyEnv.step(self, action)
 
 
