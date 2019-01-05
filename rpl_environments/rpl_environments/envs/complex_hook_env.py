@@ -55,7 +55,7 @@ class ComplexHookSingleObjectEnv(fetch_env.FetchEnv, utils.EzPickle):
         elif mode == 'human':
             self._get_viewer().render()
 
-        return self.render(*args, **kwargs)
+        return super(ComplexHookSingleObjectEnv, self).render(*args, **kwargs)
 
     def _sample_goal(self):
         goal_pos = self._goal_pos.copy()
@@ -218,27 +218,10 @@ class ComplexHookEnv(gym.Env):
         return self._env.compute_reward(*args, **kwargs)
 
 
-class ComplexHookTrainEnv(ComplexHookEnv):
-    def __init__(self):
-        ComplexHookEnv.__init__(self, train=True)
-
-class ResidualComplexHookTrainEnv(ComplexHookEnv):
+class ResidualComplexHookEnv(ComplexHookEnv):
     def __init__(self):
         ComplexHookEnv.__init__(self, train=True, subenv_type='residual')
 
-class ComplexHookTestEnv(ComplexHookEnv):
-    def __init__(self):
-        ComplexHookEnv.__init__(self, train=False)
-
-class ResidualComplexHookTestEnv(ComplexHookEnv):
-    def __init__(self):
-        ComplexHookEnv.__init__(self, train=False, subenv_type='residual')
-
-
-class TwoFrameResidualComplexHookTrainEnv(ComplexHookEnv):
+class TwoFrameResidualComplexHookEnv(ComplexHookEnv):
     def __init__(self):
         ComplexHookEnv.__init__(self, train=True, subenv_type='twoframe_residual')
-
-class TwoFrameResidualComplexHookTestEnv(ComplexHookEnv):
-    def __init__(self):
-        ComplexHookEnv.__init__(self, train=False, subenv_type='twoframe_residual')

@@ -8,14 +8,14 @@ register(
 )
 
 register(
-    id='ResidualFetchPush-v0',
-    entry_point='rpl_environments.envs:ResidualFetchPushEnv',
+    id='ResidualSlipperyPush-v0',
+    entry_point='rpl_environments.envs:ResidualSlipperyPushEnv',
     timestep_limit=50,
 )
 
 register(
-    id='FetchPushHighFriction-v0',
-    entry_point='rpl_environments.envs:FetchPushHighFrictionEnv',
+    id='SlipperyPush-v0',
+    entry_point='rpl_environments.envs:SlipperyPushEnv',
     timestep_limit=50,
 )
 
@@ -44,13 +44,13 @@ register(
 )
 
 register(
-    id = 'ResidualMPCPush-v0',
+    id='ResidualMPCPush-v0',
     entry_point='rpl_environments.envs:ResidualMPCPushEnv',
     timestep_limit=50,
 )
 
 register(
-    id = 'MPCPush-v0',
+    id='MPCPush-v0',
     entry_point='rpl_environments.envs:MPCPushEnv',
     timestep_limit=50,
 )
@@ -68,14 +68,14 @@ register(
 )
 
 register(
-    id='ComplexHookTrain-v0',
-    entry_point='rpl_environments.envs:ComplexHookTrainEnv',
+    id='ComplexHook-v0',
+    entry_point='rpl_environments.envs:ComplexHookEnv',
     timestep_limit=100,
 )
 
 register(
-    id='ResidualComplexHookTrain-v0',
-    entry_point='rpl_environments.envs:ResidualComplexHookTrainEnv',
+    id='ResidualComplexHook-v0',
+    entry_point='rpl_environments.envs:ResidualComplexHookEnv',
     timestep_limit=100,
 )
 
