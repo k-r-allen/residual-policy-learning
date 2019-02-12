@@ -5,10 +5,11 @@ import tensorflow as tf
 from tensorflow.contrib.staging import StagingArea
 import gym
 
-from gym_residual_fetch.envs.mpc_controller import MPCController
-from gym_residual_fetch.envs.miscalibrated_push_controller import get_push_control
-from gym_residual_fetch.envs.oscillating_pick_and_place_controller import get_pick_and_place_control
-from gym_residual_complex_objects.envs.hook_controller import get_hook_control
+from rpl_environments.envs.mpc_controller import MPCController
+from rpl_environments.envs.miscalibrated_push_controller import get_push_control
+from rpl_environments.envs.oscillating_pick_and_place_controller import get_pick_and_place_control
+from rpl_environments.envs.hook_controller import get_hook_control
+from rpl_environments.envs.push_database_controller import create_push_database_controller
 
 from baselines import logger
 from baselines.her.util import (
@@ -101,6 +102,10 @@ class DDPG(object):
         self.buffer = ReplayBuffer(buffer_shapes, buffer_size, self.T, self.sample_transitions)
         if 'MPCPush' in self.info['env_name']:
             self.hardcoded_controller = MPCController(gym.make("FetchPush-v1"), 10)
+        elif 'NoisyPusher' in self.info['env_name']:
+            self.hardcoded_controller = create_noisy_push_database_controller()
+        elif 'Pusher' in self.info['env_name']:
+            self.hardcoded_controller = create_push_database_controller()
 
     def _random_action(self, n):
         return np.random.uniform(low=-self.max_u, high=self.max_u, size=(n, self.dimu))
@@ -121,6 +126,10 @@ class DDPG(object):
                 mpc_obs['desired_goal'] = g[i,:]
                 sim_state = obs['observation'][25:]
                 push_controls.append(self.hardcoded_controller.act(mpc_obs, {'sim_state':{'qpos':sim_state[:22], 'qvel':sim_state[22:]}}))
+            elif 'NoisyPusher' in self.info['env_name']:
+                push_controls.append(self.hardcoded_controller(obs))
+            elif 'Pusher' in self.info['env_name']:
+                push_controls.append(self.hardcoded_controller(obs))
             elif 'Push' in self.info['env_name']:
                 push_controls.append(get_push_control(obs))
             elif 'PickAndPlace' in self.info['env_name']:

@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mujoco>
+    <compiler angle="radian" coordinate="local" meshdir="../stls/fetch" texturedir="../textures"></compiler>
+    <option timestep="0.002">
+        <flag warmstart="enable"></flag>
+    </option>
+
+    <include file="shared.xml"></include>
+    
+    <worldbody>
+        <geom name="floor0" pos="1.42 0.75 0" size="1.0 0.7 1" type="plane" condim="3" material="floor_mat"></geom>
+        <body name="floor0" pos="1.42 0.75 0">
+            <site name="target0" pos="0 0 0.5" size="0.02 0.02 0.02" rgba="1 0 0 1" type="sphere"></site>
+        </body>
+
+        <include file="robot.xml"></include>
+        
+        <body pos="1.65 0.75 0.2" name="table0">
+            <geom size="0.5 0.45 0.2" type="box" mass="20000" material="table_mat"></geom><geom size="0.016353739395676643 0.01141383610320705 0.0010869543200587885" pos="0.20898877772669128 0.034374573475486614 0.2010869543200588" type="box" mass="200" rgba="0.4 0.4 0.4 1"></geom>
+<geom size="0.012568044813466715 0.04005950405918117 0.004546335798907439" pos="-0.11250699240160386 0.16160466363840603 0.20454633579890746" type="box" mass="200" rgba="0.4 0.4 0.4 1"></geom>
+<geom size="0.045691969915796556 0.04123771243970486 0.0004933789653274429" pos="-0.144545615654442 0.24857102331167685 0.20049337896532746" type="box" mass="200" rgba="0.4 0.4 0.4 1"></geom>
+<geom size="0.006903355155369544 0.04574008254885078 0.0026268021249035585" pos="0.23487510429481023 -0.18800767161088477 0.20262680212490358" type="box" mass="200" rgba="0.4 0.4 0.4 1"></geom>
+<geom size="0.04490197934002117 0.0014733624222932873 0.0006583314961205774" pos="0.13992422748429162 0.2671427640243981 0.20065833149612058" type="box" mass="200" rgba="0.4 0.4 0.4 1"></geom>
+<geom size="0.011631308429568561 0.03817655760592679 0.0008905127520875607" pos="-0.08480668270954306 -0.11557982667022512 0.20089051275208758" type="box" mass="200" rgba="0.4 0.4 0.4 1"></geom>
+<geom size="0.0437735098302753 0.03913950101818471 0.0020593938748574517" pos="-0.24758015100870379 0.2902095634541923 0.20205939387485747" type="box" mass="200" rgba="0.4 0.4 0.4 1"></geom>
+<geom size="0.045966279768636424 0.019132510269328076 0.0031989675137403346" pos="-0.22459244673471213 0.0016281540034741582 0.20319896751374034" type="box" mass="200" rgba="0.4 0.4 0.4 1"></geom>
+<geom size="0.01719407442141395 0.03408367850646703 0.001803832494688882" pos="-0.2741526590500946 -0.11454408880400388 0.2018038324946889" type="box" mass="200" rgba="0.4 0.4 0.4 1"></geom>
+        </body>
+        
+        <body pos="1.375 0.626313038315 0.46168696168499995" name="object0">
+            <light castshadow="false"/>
+            <geom type="mesh" density="1311.07580702" rgba="1 1 1 1" material="object" mesh="object_mesh" conaffinity="0" contype="1"/>
+            <joint name="object0:joint" type="free" damping="4.498521359328957"></joint>
+            <site name="object0" pos="0.0 0.058686961685000094 -0.04168696168499997" size="0.002 0.002 0.002" rgba="1 0 0 0" type="sphere"></site>
+        </body>
+
+        <body name="hook" pos="1.0 0.025 0.025">
+            <joint name="hook:joint" type="free" damping="0.01"></joint>
+            <geom size="0.4 0.015 0.015" type="box" condim="3" name="hook_base" material="block_mat" mass="2"></geom>
+            <geom size="0.015 0.1 0.015" pos="0.4 0.085 0." type="box" condim="3" name="hook_head" material="block_mat" mass="2"></geom>
+            <site name="hook" pos="-0.25 0 0" size="0.002 0.002 0.002" rgba="1 0 0 1" type="sphere"></site>
+        </body>
+
+        <light directional="true" ambient="0.2 0.2 0.2" diffuse="0.8 0.8 0.8" specular="0.3 0.3 0.3" castshadow="false" pos="0 0 4" dir="0 0 -1" name="light0"></light>
+    </worldbody>
+
+    <asset>
+        <mesh scale="0.001217174042125 0.001217174042125 0.001217174042125" file="mujoco_models/tesaract.stl" name="object_mesh"/>
+        <texture file="textures/obj_textures/cobwebbed_0100.png" name="object"/>
+        <material specular="1" texture="object" rgba="0.9 0.9 0.9 1" shininess="0.3" name="object"/>
+    </asset>
+    
+    <actuator>
+        <position ctrllimited="true" ctrlrange="0 0.2" joint="robot0:l_gripper_finger_joint" kp="30000" name="robot0:l_gripper_finger_joint" user="1"></position>
+        <position ctrllimited="true" ctrlrange="0 0.2" joint="robot0:r_gripper_finger_joint" kp="30000" name="robot0:r_gripper_finger_joint" user="1"></position>
+    </actuator>
+</mujoco>
+    
