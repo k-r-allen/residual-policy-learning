@@ -1,6 +1,7 @@
 import numpy as np
 import gym
 import rpl_environments
+import gym_residual_complex_objects
 from baselines import logger
 from ddpg_controller_residual_base import DDPG
 from baselines.her.her import make_sample_her_transitions
