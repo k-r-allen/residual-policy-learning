@@ -1,6 +1,6 @@
 import numpy as np
 import gym
-import gym_residual_fetch
+import rpl_environments
 import gym_residual_complex_objects
 from baselines import logger
 from baselines.her.ddpg import DDPG
